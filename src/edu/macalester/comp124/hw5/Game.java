@@ -121,7 +121,6 @@ public class Game {
 
     public void movePlayer(char direction) {
         encounter();
-        moveMonsters();
         switch (direction) {
             case 'n':
                 movePlayer(player.x, player.y - 1);
@@ -136,7 +135,7 @@ public class Game {
                 movePlayer(player.x - 1, player.y);
                 break;
         }
-
+        moveMonsters();
 
     }
 
@@ -338,6 +337,8 @@ public class Game {
             System.out.println("player choose to run away");
             if (player.defence > bowser.defence) {
                 System.out.println("you successful ran away!");
+                player.x = 23;
+                player.y = 15;
             }
         }
     }
