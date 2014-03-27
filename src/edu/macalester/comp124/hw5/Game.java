@@ -338,8 +338,7 @@ public class Game {
             System.out.println("player choose to run away");
             if (player.defence > bowser.defence) {
                 System.out.println("you successful ran away!");
-                player.x = 23;
-                player.y = 15;
+
             }
         }
     }
