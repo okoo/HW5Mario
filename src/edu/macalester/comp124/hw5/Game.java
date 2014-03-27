@@ -22,9 +22,10 @@ public class Game {
 
 
     public Game() {
-
+        //creat a new map
         map = new Map("main");
-
+        
+        //a while loop let user distribute 10 units of point to player
         while (true) {
             Scanner console = new Scanner(System.in);
             player = new Player();
@@ -51,25 +52,26 @@ public class Game {
                 break;
             }
         }
-
+        //show charater stats at the beginging
         System.out.println("you character stats, will reprint if anything change");
         System.out.println("player strength: " + player.strength);
         System.out.println("player defence: " + player.defence);
         System.out.println("player hp: " + player.hp);
         System.out.println("player money: " + player.money());
-
+        
+        //spawning 5 new monsters
         for (int i = 0; i < 5; i++) {
             monsters[i] = new Monster();
             spawnMonster(i);
             agents.add(monsters[i]);
         }
 
-
+        //make a new store
         store = new Store();
         store.x = 5;
         store.y = 5;
         store.money();
-
+        //make a new Bowser
         bowser = new Bowser();
         bowser.x = 23;
         bowser.y = 16;
@@ -95,12 +97,14 @@ public class Game {
         //--- Assuming this is the last thing that happens in the round,
         //---	start a new round. This lets the other agents make their moves.
 
-    }
-
+    }   
+    
+    //
     public void moveMonster(int index, int x, int y) {
+        //Don't do anything if the move is illegal
         String terrain = map.terrain[x][y];
         if (!map.passibility.containsKey(terrain)) {
-
+            //move monster to a new spot
             monsters[index].x = x;
             monsters[index].y = y;
         }
@@ -109,7 +113,7 @@ public class Game {
 
     int random_int1;
     int random_int2;
-
+    //---move monster to a random spot (8 boxes around it)
     public void moveMonsters() {
         Random dice = new Random();
         for (int i = 0; i < 5; i++) {
@@ -144,7 +148,7 @@ public class Game {
      * What do the other agents (NPCs, monsters, etc.) want to do?
      */
 
-
+    //---randomly spaw a monster
     public void spawnMonster(int index) {
         while (true) {
             Random dice = new Random();
@@ -162,7 +166,7 @@ public class Game {
 
 
 
-
+    //---check if player encounter anything on the map
     public void encounter() {
         //check if encounter store
         if ((player.x == store.x) && (player.y == store.y)) {
@@ -194,14 +198,14 @@ public class Game {
         }
 
     }
-
+    //when player step on gold
     public void onGOld(int x, int y) {
         System.out.println("you step on gold! earned 5 gold coins");
         player.money += 5;
         map.items[x][y] = null;
         System.out.println("player money: " + player.money);
     }
-
+    //when player step on monster
     public void onTouchMonster(int index) {
         Scanner console = new Scanner(System.in);
         System.out.println("you step on a monster!");
@@ -283,14 +287,10 @@ public class Game {
             }
 
 
-            //--- Time to fight
-//		CombatForm form = new CombatForm();
-//		form.game = this;	// let them know about us so they can talk to us
-//		form.enemies = ???;
-//		form.run();
+         
         }
     }
-
+    //----when player touch bowser
     public void onTouchBowser() {
         System.out.println("you run into Bowser");
         System.out.println("--------Bowser's------");
@@ -342,7 +342,7 @@ public class Game {
             }
         }
     }
-
+    //----when player run into store
     public void inStore() {
         Scanner console = new Scanner(System.in);
         System.out.println("welcome to Mario Store");
@@ -387,14 +387,14 @@ public class Game {
         }
 
     }
-
+    //player win!
     public void win() {
         //make player win
         System.out.println(" you got the golden star! you win the game!");
         quit();
 
     }
-
+    //make the game quit
     public void quit() {
         System.exit(0);
     }
