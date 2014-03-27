@@ -338,6 +338,8 @@ public class Game {
             System.out.println("player choose to run away");
             if (player.defence > bowser.defence) {
                 System.out.println("you successful ran away!");
+                player.x = 23;
+                player.y = 15;
             }
         }
     }
@@ -345,7 +347,7 @@ public class Game {
     public void inStore() {
         Scanner console = new Scanner(System.in);
         System.out.println("welcome to Mario Store");
-        System.out.println("you currently have: " + player.money() + "gold coins");
+        System.out.println("you currently have: " + player.money + "gold coins");
         System.out.println("1.buy strength 2.buy defense 3.restore hp");
         int strength_int = console.nextInt();
         if (strength_int == 1) {
