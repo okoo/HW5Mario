@@ -127,48 +127,31 @@ public class Game {
         switch (direction) {
             case 'n':
                 movePlayer(player.x, player.y - 1);
-                //check if on gold, do this seperate with encounter method because gold is an item
-                if (map.items[player.x][player.y] != null) {
-
-
-                    if (map.items[player.x][player.y].equals("g")) {
-                        onGOld(player.x, player.y);
-                    }
-                }
                 break;
             case 's':
                 movePlayer(player.x, player.y + 1);
-                //check if on gold
-                if (map.items[player.x][player.y] != null) {
-
-
-                    if (map.items[player.x][player.y].equals("g")) {
-                        onGOld(player.x, player.y);
-                    }
-                }
                 break;
             case 'e':
                 movePlayer(player.x + 1, player.y);
-                //check if on gold
-                if (map.items[player.x][player.y] != null) {
-
-
-                    if (map.items[player.x][player.y].equals("g")) {
-                        onGOld(player.x, player.y);
-                    }
-                }
                 break;
             case 'w':
                 movePlayer(player.x - 1, player.y);
-                //check if on gold
-                if (map.items[player.x][player.y] != null) {
-
-
-                    if (map.items[player.x][player.y].equals("g")) {
-                        onGOld(player.x, player.y);
-                    }
-                }
                 break;
+        }
+        //------check if step on gold
+        if (map.items[player.x][player.y] != null) {
+
+
+            if (map.items[player.x][player.y].equals("g")) {
+                onGOld(player.x, player.y);
+            }
+        }
+        if (map.items[player.x][player.y] != null) {
+
+
+            if (map.items[player.x][player.y].equals("f")) {
+                onFlower();
+            }
         }
         moveMonsters();
 
@@ -228,6 +211,13 @@ public class Game {
         player.money += 5;
         map.items[x][y] = null;
         System.out.println("player money: " + player.money);
+    }
+    //player run into flower
+    public void onFlower(){
+        System.out.println("you got the flower! it increase your strength!");
+        player.strength += 10;
+        map.items[22][7] = null;
+        System.out.println("player strength: " + player.strength);
     }
     //player run into monster
     public void onTouchMonster(int index) {

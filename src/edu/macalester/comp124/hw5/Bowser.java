@@ -6,9 +6,9 @@ package edu.macalester.comp124.hw5;
 public class Bowser extends Agent {
     public Bowser() {
         super("bowser");
-        strength = 5;
+        strength = 7;
         defence = 0;
-        hp = 15;
+        hp = 50;
         money = 100;
     }
 
