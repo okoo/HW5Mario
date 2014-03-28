@@ -138,7 +138,7 @@ public class Game {
                 movePlayer(player.x - 1, player.y);
                 break;
         }
-        //------check if step on gold
+        //------check if player step on gold
         if (map.items[player.x][player.y] != null) {
 
 
@@ -146,11 +146,20 @@ public class Game {
                 onGOld(player.x, player.y);
             }
         }
+        //----check if player step on flower
         if (map.items[player.x][player.y] != null) {
 
 
             if (map.items[player.x][player.y].equals("f")) {
                 onFlower();
+            }
+        }
+        //----check if player step on ICE flower
+        if (map.items[player.x][player.y] != null) {
+
+
+            if (map.items[player.x][player.y].equals("i")) {
+                onIceFlower();
             }
         }
         moveMonsters();
@@ -218,6 +227,13 @@ public class Game {
         player.strength += 10;
         map.items[22][7] = null;
         System.out.println("player strength: " + player.strength);
+    }
+    //player run into iceflower
+    public void onIceFlower(){
+        System.out.println("you got the ICE flower! it increase your hp!");
+        player.hp += 10;
+        map.items[17][17] = null;
+        System.out.println("player hp: " + player.hp);
     }
     //player run into monster
     public void onTouchMonster(int index) {
