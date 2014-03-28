@@ -126,15 +126,43 @@ public class Game {
         switch (direction) {
             case 'n':
                 movePlayer(player.x, player.y - 1);
+                if (map.items[player.x][player.y] != null) {
+
+
+                    if (map.items[player.x][player.y].equals("g")) {
+                        onGOld(player.x, player.y);
+                    }
+                }
                 break;
             case 's':
                 movePlayer(player.x, player.y + 1);
+                if (map.items[player.x][player.y] != null) {
+
+
+                    if (map.items[player.x][player.y].equals("g")) {
+                        onGOld(player.x, player.y);
+                    }
+                }
                 break;
             case 'e':
                 movePlayer(player.x + 1, player.y);
+                if (map.items[player.x][player.y] != null) {
+
+
+                    if (map.items[player.x][player.y].equals("g")) {
+                        onGOld(player.x, player.y);
+                    }
+                }
                 break;
             case 'w':
                 movePlayer(player.x - 1, player.y);
+                if (map.items[player.x][player.y] != null) {
+
+
+                    if (map.items[player.x][player.y].equals("g")) {
+                        onGOld(player.x, player.y);
+                    }
+                }
                 break;
         }
         moveMonsters();
@@ -175,14 +203,8 @@ public class Game {
                 onTouchMonster(i);
             }
         }
-        //check if run into gold
-        if (map.items[player.x][player.y] != null) {
 
 
-            if (map.items[player.x][player.y].equals("g")) {
-                onGOld(player.x, player.y);
-            }
-        }
         //check if run iinto bowser
         if ((player.x == bowser.x) && (player.y == bowser.y)) {
             onTouchBowser();

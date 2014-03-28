@@ -90,6 +90,7 @@ public class MainForm extends javax.swing.JFrame {
                     repaint();
                     return true;
 
+
                 //--- does not resize scaledImages, they're still original size
                 //--- either clips image or padds it with blank
                 case KeyEvent.VK_PLUS:
@@ -111,9 +112,10 @@ public class MainForm extends javax.swing.JFrame {
                     return true;
             }
         }
+        game.encounter();
         //--- This is stupid but it's needed to keep hot keys like the
         //---	+ button from showing up in a text box
-        else if (e.getID() == KeyEvent.KEY_TYPED) {
+        if (e.getID() == KeyEvent.KEY_TYPED) {
             switch (e.getKeyChar()) {
                 case '+':
                 case '=':
