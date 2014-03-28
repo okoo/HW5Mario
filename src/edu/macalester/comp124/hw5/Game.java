@@ -14,7 +14,7 @@ public class Game {
     public Agent player;    // change this to whatever subclass player is
     public Agent store;
     public Agent bowser;
-    public Monster monsters[] = new Monster[5];
+    public Monster monsters[] = new Monster[14];
     //--- A list of all the agents in the game (player, NPCs, monsters, etc.)
     //--- We need to know this so we know who to draw and so that we can ask
     //---	each turn what they want to do
@@ -58,7 +58,7 @@ public class Game {
         System.out.println("player hp: " + player.hp);
         System.out.println("player money: " + player.money());
         //create monsters and add them to the agent list
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 14; i++) {
             monsters[i] = new Monster();
             spawnMonster(i);
             agents.add(monsters[i]);
@@ -114,7 +114,7 @@ public class Game {
     //randomly move monster to the eight spot around it
     public void moveMonsters() {
         Random dice = new Random();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 14; i++) {
             random_int1 = (dice.nextInt(3) - 1);
             random_int2 = (dice.nextInt(3) - 1);
             moveMonster(i, monsters[i].x + random_int1, monsters[i].y + random_int2);
@@ -203,7 +203,7 @@ public class Game {
             inStore();
         }
         //check if run into monster
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 14; i++) {
             if ((monsters[i].x == player.x) && (monsters[i].y == player.y)) {
                 onTouchMonster(i);
             }
