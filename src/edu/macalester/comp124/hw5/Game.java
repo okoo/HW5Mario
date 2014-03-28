@@ -22,9 +22,9 @@ public class Game {
 
 
     public Game() {
-
+        //make a new map
         map = new Map("main");
-
+        //make a while loop. the while loop won't quit until user appropriatly distribute 10 points to player
         while (true) {
             Scanner console = new Scanner(System.in);
             player = new Player();
@@ -51,25 +51,25 @@ public class Game {
                 break;
             }
         }
-
+        //print out player's stats
         System.out.println("you character stats, will reprint if anything change");
         System.out.println("player strength: " + player.strength);
         System.out.println("player defence: " + player.defence);
         System.out.println("player hp: " + player.hp);
         System.out.println("player money: " + player.money());
-
+        //create monsters and add them to the agent list
         for (int i = 0; i < 5; i++) {
             monsters[i] = new Monster();
             spawnMonster(i);
             agents.add(monsters[i]);
         }
 
-
+        //make a new store
         store = new Store();
         store.x = 5;
         store.y = 5;
         store.money();
-
+        //make a new bowser
         bowser = new Bowser();
         bowser.x = 23;
         bowser.y = 16;
@@ -97,8 +97,9 @@ public class Game {
         //---	start a new round. This lets the other agents make their moves.
 
     }
-
+    //make the monster
     public void moveMonster(int index, int x, int y) {
+        //dont do anything if the move is illegal
         String terrain = map.terrain[x][y];
         if (!map.passibility.containsKey(terrain)) {
 
@@ -110,7 +111,7 @@ public class Game {
 
     int random_int1;
     int random_int2;
-
+    //randomly move monster to the eight spot around it
     public void moveMonsters() {
         Random dice = new Random();
         for (int i = 0; i < 5; i++) {
@@ -126,6 +127,7 @@ public class Game {
         switch (direction) {
             case 'n':
                 movePlayer(player.x, player.y - 1);
+                //check if on gold, do this seperate with encounter method because gold is an item
                 if (map.items[player.x][player.y] != null) {
 
 
@@ -136,6 +138,7 @@ public class Game {
                 break;
             case 's':
                 movePlayer(player.x, player.y + 1);
+                //check if on gold
                 if (map.items[player.x][player.y] != null) {
 
 
@@ -146,6 +149,7 @@ public class Game {
                 break;
             case 'e':
                 movePlayer(player.x + 1, player.y);
+                //check if on gold
                 if (map.items[player.x][player.y] != null) {
 
 
@@ -156,6 +160,7 @@ public class Game {
                 break;
             case 'w':
                 movePlayer(player.x - 1, player.y);
+                //check if on gold
                 if (map.items[player.x][player.y] != null) {
 
 
@@ -176,7 +181,7 @@ public class Game {
      * What do the other agents (NPCs, monsters, etc.) want to do?
      */
 
-
+    //---spawn a monster on the map
     public void spawnMonster(int index) {
         while (true) {
             Random dice = new Random();
@@ -191,7 +196,7 @@ public class Game {
         }
     }
 
-
+    //check if player encounter anything on the map before next turn
     public void encounter() {
         //check if encounter store
         if ((player.x == store.x) && (player.y == store.y)) {
@@ -205,7 +210,7 @@ public class Game {
         }
 
 
-        //check if run iinto bowser
+        //check if run into bowser
         if ((player.x == bowser.x) && (player.y == bowser.y)) {
             onTouchBowser();
         }
@@ -217,14 +222,14 @@ public class Game {
         }
 
     }
-
+    //if player runs into gold
     public void onGOld(int x, int y) {
         System.out.println("you step on gold! earned 5 gold coins");
         player.money += 5;
         map.items[x][y] = null;
         System.out.println("player money: " + player.money);
     }
-
+    //player run into monster
     public void onTouchMonster(int index) {
         Scanner console = new Scanner(System.in);
         System.out.println("you step on a monster!");
@@ -313,7 +318,7 @@ public class Game {
 //		form.run();
         }
     }
-
+    //player run into bowser
     public void onTouchBowser() {
         System.out.println("you run into Bowser");
         System.out.println("--------Bowser's------");
@@ -365,7 +370,7 @@ public class Game {
             }
         }
     }
-
+    //player run into store
     public void inStore() {
         Scanner console = new Scanner(System.in);
         System.out.println("welcome to Mario Store");
@@ -417,7 +422,7 @@ public class Game {
         quit();
 
     }
-
+    //quit the game
     public void quit() {
         System.exit(0);
     }
